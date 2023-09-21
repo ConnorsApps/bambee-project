@@ -21,3 +21,8 @@
 
 	Cypress can test native react components as well as be an end-to-end testing suite. Integration tests are where you get the most bang for your buck on the frontend. 
 
+## Business Requirements
+- Create tasks with name, description, and due date
+	- Have statuses (v1: `New`, `Complete`) (v2 `New`, `In-Progress`, `Complete`) default is `New`.
+- Be able to delete tasks (*This is essential for tasks the user doesn't want to do*)
+- Api versioning, make it backwards compatible
