@@ -14,6 +14,7 @@ model User {
   id    String @id @default(cuid())
   name  String
   email String
+  // Task  Task[]
 }
 
 enum TaskStatus {
@@ -29,4 +30,6 @@ model Task {
   description String?
   dueBy       DateTime
   status      TaskStatus
+  // User        User       @relation(fields: [userId], references: [id])
+  // userId      String
 }
