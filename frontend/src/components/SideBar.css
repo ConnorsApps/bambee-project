@@ -1,0 +1,18 @@
+.task {
+	display: flex;
+	flex-direction: column;
+}
+
+.taskName {
+	gap: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.taskDescription {
+	opacity: .5;
+}
+
+.sideBar {
+	display: flex;
+}
