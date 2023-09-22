@@ -16,6 +16,7 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { formatRelative } from 'date-fns';
 
 const taskItemStyles = { borderRadius: '1rem', marginBottom: '.5rem', border: '1px solid black', flexDirection: 'column', alignItems: 'start' };
 
@@ -36,12 +37,15 @@ const Tasks = () => {
   };
 
   const TaskHeader = (props: { task: Task }) => (
-    <div className='taskName'>
-      <TaskIcon />
-      <div style={{ marginRight: '2rem' }}>{props.task.name}</div>
-      <Button sx={{ position: 'absolute', right: '0' }} onClick={() => removeTask(props.task.id!)}>
-        <DeleteIcon color='error' />
-      </Button>
+    <div>
+      <div className='taskName'>
+        <TaskIcon />
+        <div style={{ marginRight: '2rem' }}>{props.task.name}</div>
+        <Button sx={{ position: 'absolute', right: '0' }} onClick={() => removeTask(props.task.id!)}>
+          <DeleteIcon color='error' />
+        </Button>
+      </div>
+      Due: {formatRelative(new Date(props.task.dueBy), new Date())}
     </div>
   );
 

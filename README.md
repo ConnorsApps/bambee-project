@@ -6,6 +6,8 @@ The Task Service API is a robust solution built on Node.js (Typescript) designed
 - [Frontend](./frontend/README.md)
 - [Backend](./backend/README.md)
 
+![Demo Image](pics/pic.png)
+
 ## Running localy
 ```bash
 # Postgres database
@@ -37,3 +39,6 @@ npx prisma studio
 - Jest for the backend
 
 Both can be run with `npm run test`
+
+![Test Image](pics/test.png)
+
