@@ -1,9 +1,9 @@
 import { prismaMock } from '../test-utils/singleton';
 import { getMockReq, getMockRes } from '@jest-mock/express';
-import { apiv2 } from './handlers';
+import { apiv1 } from './handlers';
 import { Task, TaskStatus } from '@prisma/client';
 
-describe('Task V2 Handlers', () => {
+describe('Task V1 Handlers', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -19,7 +19,7 @@ describe('Task V2 Handlers', () => {
     });
     const { res } = getMockRes();
 
-    const handlers = apiv2.getHandlers(prismaMock as any);
+    const handlers = apiv1.getHandlers(prismaMock as any);
 
     await handlers.createTaskHandler(req, res);
 
@@ -36,7 +36,7 @@ describe('Task V2 Handlers', () => {
     });
     const { res } = getMockRes();
 
-    const handlers = apiv2.getHandlers(prismaMock as any);
+    const handlers = apiv1.getHandlers(prismaMock as any);
 
     await handlers.updateTaskHandler(req, res);
 
@@ -59,7 +59,7 @@ describe('Task V2 Handlers', () => {
     const req = getMockReq();
     const { res } = getMockRes();
 
-    const handlers = apiv2.getHandlers(prismaMock as any);
+    const handlers = apiv1.getHandlers(prismaMock as any);
 
     await handlers.listTaskHandler(req, res);
 
@@ -73,7 +73,7 @@ describe('Task V2 Handlers', () => {
 
     prismaMock.task.delete.mockResolvedValue({} as any);
 
-    const handlers = apiv2.getHandlers(prismaMock as any);
+    const handlers = apiv1.getHandlers(prismaMock as any);
 
     await handlers.removeTaskHandler(req, res);
 
