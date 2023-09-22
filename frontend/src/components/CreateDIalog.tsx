@@ -43,13 +43,16 @@ const CreateDialog = (props: CreateDialogProps) => {
   return (
     <Dialog onClose={props.onCancel} open={open}>
       <DialogTitle id='create-new-task-title'>Create New Task</DialogTitle>
-      <form ref={formRef}>
+      <form style={{ gap: '1rem', display: 'flex', flexDirection: 'column', padding: '3rem', minWidth: '40vw' }} ref={formRef}>
         <TextField id='name-field' label='Name' name='name' value={name} onChange={(e) => setName(e.target.value)} required fullWidth />
         <TextField id='description' label='Description' name='description' value={description} onChange={(e) => setDescription(e.target.value)} fullWidth />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateTimePicker label='Due By' value={dueBy} onChange={setDueBy} />
-        </LocalizationProvider>
-        <Button id='submit-button' disabled={!isFormValid()} onClick={submit} type='submit' variant='contained' color='primary'>
+        <div style={{ width: '100%' }}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker label='Due By' value={dueBy} onChange={setDueBy} />
+          </LocalizationProvider>
+        </div>
+
+        <Button sx={{minHeight:'4rem', marginTop:'2rem'}} id='submit-button' disabled={!isFormValid()} onClick={submit} type='submit' variant='contained' color='primary'>
           Submit
         </Button>
       </form>

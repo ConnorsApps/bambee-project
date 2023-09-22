@@ -30,3 +30,10 @@ View the database with
 cd ./backend
 npx prisma studio
 ```
+
+## Testing
+
+- Cypress E2E for the frontend
+- Jest for the backend
+
+Both can be run with `npm run test`

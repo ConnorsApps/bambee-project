@@ -62,7 +62,7 @@ const Tasks = () => {
   return (
     <div className='taskContainer'>
       <Box sx={BoxStyles}>
-        <List sx={{ padding: '.5rem' }}>
+        <List id='backlog-list' sx={{ padding: '.5rem' }}>
           <ListItem>
             <InventoryIcon color='primary' />
             <ListItemText sx={{ marginLeft: '1rem' }}>Backlog</ListItemText>
@@ -70,7 +70,7 @@ const Tasks = () => {
           {tasks
             .filter((task) => task.status === TaskStatus.NEW)
             .map((task) => (
-              <ListItem sx={taskItemStyles} key={task.id}>
+              <ListItem data-cy-task-name={task.name} sx={taskItemStyles} key={task.id}>
                 <div className='task'>
                   <TaskHeader task={task} />
                   <ListItemText className='taskDescription'>{task.description}</ListItemText>
@@ -83,7 +83,7 @@ const Tasks = () => {
         </List>
       </Box>
       <Box sx={BoxStyles}>
-        <List sx={{ padding: '.5rem' }}>
+        <List id='in-progress-list' sx={{ padding: '.5rem' }}>
           <ListItem>
             <TerminalIcon color='warning' />
             <ListItemText sx={{ marginLeft: '1rem' }}>In Progress...</ListItemText>
@@ -91,7 +91,7 @@ const Tasks = () => {
           {tasks
             .filter((task) => task.status === TaskStatusV2.IN_PROGRESS)
             .map((task) => (
-              <ListItem sx={taskItemStyles} key={task.id}>
+              <ListItem data-cy-task-name={task.name} sx={taskItemStyles} key={task.id}>
                 <div className='task'>
                   <TaskHeader task={task} />
                   <ListItemText className='taskDescription'>{task.description}</ListItemText>
@@ -109,7 +109,7 @@ const Tasks = () => {
         </List>
       </Box>
       <Box sx={BoxStyles}>
-        <List sx={{ padding: '.5rem' }}>
+        <List id='complete-list' sx={{ padding: '.5rem' }}>
           <ListItem>
             <FlagIcon color='success' />
             <ListItemText sx={{ marginLeft: '1rem' }}>Complete</ListItemText>
@@ -117,7 +117,7 @@ const Tasks = () => {
           {tasks
             .filter((task) => task.status === TaskStatus.COMPLETE)
             .map((task) => (
-              <ListItem sx={taskItemStyles} key={task.id}>
+              <ListItem data-cy-task-name={task.name} sx={taskItemStyles} key={task.id}>
                 <TaskHeader task={task} />
                 <ListItemText className='taskDescription'>{task.description}</ListItemText>
                 <Button sx={{ maxWidth: '5rem' }} variant='outlined' onClick={() => updateStatus(task.id!, TaskStatusV2.IN_PROGRESS)}>
