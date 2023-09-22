@@ -30,6 +30,8 @@ model Task {
   description String?
   dueBy       DateTime
   status      TaskStatus
-  // User        User       @relation(fields: [userId], references: [id])
-  // userId      String
 }
+
+// TODO add user
+// User        User       @relation(fields: [userId], references: [id])
+// userId      String

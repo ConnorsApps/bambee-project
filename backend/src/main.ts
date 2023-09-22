@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { apiv1 } from './v1/api';
-import { apiv2 } from './v2/api';
+import { apiv1 } from './v1/handlers';
+import { apiv2 } from './v2/handlers';
 
 dotenv.config();
 
