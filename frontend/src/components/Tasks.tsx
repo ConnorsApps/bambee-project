@@ -15,16 +15,35 @@ import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const taskItemStyles = { borderRadius: '1rem', marginBottom: '.5rem', border: '1px solid black', flexDirection: 'column', alignItems: 'start' };
+
+const BoxStyles = { border: '1px solid black', width: '33%', bgcolor: 'background.paper' };
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<[Task] | []>([]);
 
   const refreshTasks = async () => {
-    const res = await (await fetch(`${BACKEND_URL}/v1/task/list`, { method: 'GET' })).json();
+    const res = await (await fetch(`${BACKEND_URL}/v2/task/list`, { method: 'GET' })).json();
     setTasks(res);
   };
+
+  const removeTask = async (id: string) => {
+    await fetch(`${BACKEND_URL}/v2/task`, { method: 'DELETE', headers: DEFAULT_HEADERS, body: JSON.stringify({ id }) });
+
+    refreshTasks();
+  };
+
+  const TaskHeader = (props: { task: Task }) => (
+    <div className='taskName'>
+      <TaskIcon />
+      <div style={{ marginRight: '2rem' }}>{props.task.name}</div>
+      <Button sx={{ position: 'absolute', right: '0' }} onClick={() => removeTask(props.task.id!)}>
+        <DeleteIcon color='error' />
+      </Button>
+    </div>
+  );
 
   const updateStatus = async (id: string, status: TaskStatus | TaskStatusV2) => {
     let apiVersion = 'v1';
@@ -41,8 +60,8 @@ const Tasks = () => {
   }, [setTasks]);
 
   return (
-    <div className='sideBar'>
-      <Box sx={{ width: '33%', bgcolor: 'background.paper' }}>
+    <div className='taskContainer'>
+      <Box sx={BoxStyles}>
         <List sx={{ padding: '.5rem' }}>
           <ListItem>
             <InventoryIcon color='primary' />
@@ -53,9 +72,7 @@ const Tasks = () => {
             .map((task) => (
               <ListItem sx={taskItemStyles} key={task.id}>
                 <div className='task'>
-                  <div className='taskName'>
-                    <TaskIcon /> {task.name}
-                  </div>
+                  <TaskHeader task={task} />
                   <ListItemText className='taskDescription'>{task.description}</ListItemText>
                   <Button sx={{ maxWidth: '5rem' }} variant='outlined' onClick={() => updateStatus(task.id!, TaskStatusV2.IN_PROGRESS)}>
                     <StartIcon />
@@ -65,7 +82,7 @@ const Tasks = () => {
             ))}
         </List>
       </Box>
-      <Box sx={{ width: '33%', bgcolor: 'background.paper' }}>
+      <Box sx={BoxStyles}>
         <List sx={{ padding: '.5rem' }}>
           <ListItem>
             <TerminalIcon color='warning' />
@@ -76,9 +93,7 @@ const Tasks = () => {
             .map((task) => (
               <ListItem sx={taskItemStyles} key={task.id}>
                 <div className='task'>
-                  <div className='taskName'>
-                    <TaskIcon /> {task.name}
-                  </div>
+                  <TaskHeader task={task} />
                   <ListItemText className='taskDescription'>{task.description}</ListItemText>
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <Button sx={{ maxWidth: '5rem' }} variant='outlined' onClick={() => updateStatus(task.id!, TaskStatus.NEW)}>
@@ -93,7 +108,7 @@ const Tasks = () => {
             ))}
         </List>
       </Box>
-      <Box sx={{ width: '33%', bgcolor: 'background.paper' }}>
+      <Box sx={BoxStyles}>
         <List sx={{ padding: '.5rem' }}>
           <ListItem>
             <FlagIcon color='success' />
@@ -103,9 +118,7 @@ const Tasks = () => {
             .filter((task) => task.status === TaskStatus.COMPLETE)
             .map((task) => (
               <ListItem sx={taskItemStyles} key={task.id}>
-                <div className='taskName'>
-                  <TaskIcon /> {task.name}
-                </div>
+                <TaskHeader task={task} />
                 <ListItemText className='taskDescription'>{task.description}</ListItemText>
                 <Button sx={{ maxWidth: '5rem' }} variant='outlined' onClick={() => updateStatus(task.id!, TaskStatusV2.IN_PROGRESS)}>
                   <UnarchiveIcon />

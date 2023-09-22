@@ -13,6 +13,7 @@
 	opacity: .5;
 }
 
-.sideBar {
+.taskContainer {
 	display: flex;
+	height: 95vh;
 }

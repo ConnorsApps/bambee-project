@@ -1,9 +1,10 @@
 import { Task } from '@prisma/client';
 
 const valid = (task: Task) => {
-  // todo
   const issues = [];
-  console.log('task',task)
+  if (!task.name) issues.push('name required');
+  if (!task.dueBy) issues.push('dueBy required');
+  if (!task.status) issues.push('status required');
 
   return issues;
 };

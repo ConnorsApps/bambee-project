@@ -28,7 +28,7 @@ const CreateDialog = (props: CreateDialogProps) => {
       name,
       createdAt: new Date(),
       description,
-      dueBy: dueBy!.toDate(), // Can't be false due to validation function
+      dueBy: dueBy!.toDate(), // Can't be false due to isFormValid function
       status: TaskStatus.NEW,
     };
     onClose(task);
@@ -49,13 +49,6 @@ const CreateDialog = (props: CreateDialogProps) => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker label='Due By' value={dueBy} onChange={setDueBy} />
         </LocalizationProvider>
-        {/* <FormControl fullWidth>
-          <InputLabel>Status</InputLabel>
-          <Select name='status' value={task.status} onChange={handleChange} required>
-            <MenuItem value={TaskStatusV1.NEW}>{TaskStatusV1.NEW}</MenuItem>
-            <MenuItem value={TaskStatusV1.COMPLETE}>{TaskStatusV1.COMPLETE}</MenuItem>
-          </Select>
-        </FormControl> */}
         <Button disabled={!isFormValid()} onClick={submit} type='submit' variant='contained' color='primary'>
           Submit
         </Button>
