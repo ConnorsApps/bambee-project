@@ -42,14 +42,14 @@ const CreateDialog = (props: CreateDialogProps) => {
 
   return (
     <Dialog onClose={props.onCancel} open={open}>
-      <DialogTitle>Create New Task</DialogTitle>
+      <DialogTitle id='create-new-task-title'>Create New Task</DialogTitle>
       <form ref={formRef}>
-        <TextField label='Name' name='name' value={name} onChange={(e) => setName(e.target.value)} required fullWidth />
-        <TextField label='Description' name='description' value={description} onChange={(e) => setDescription(e.target.value)} fullWidth />
+        <TextField id='name-field' label='Name' name='name' value={name} onChange={(e) => setName(e.target.value)} required fullWidth />
+        <TextField id='description' label='Description' name='description' value={description} onChange={(e) => setDescription(e.target.value)} fullWidth />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker label='Due By' value={dueBy} onChange={setDueBy} />
         </LocalizationProvider>
-        <Button disabled={!isFormValid()} onClick={submit} type='submit' variant='contained' color='primary'>
+        <Button id='submit-button' disabled={!isFormValid()} onClick={submit} type='submit' variant='contained' color='primary'>
           Submit
         </Button>
       </form>
