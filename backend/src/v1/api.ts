@@ -16,7 +16,6 @@ const getRouter = (db: TasksPrismaClient) => {
     res.status(200);
     return res.send({ message: 'created' });
   });
-  console.log(db);
 
   return router;
 };

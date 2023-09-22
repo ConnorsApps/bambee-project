@@ -8,7 +8,7 @@ const getRouter = (
   const router = express.Router();
 
   router.get('/', () => {});
-  console.log(db);
+  // console.log(db);
 
   return router;
 };

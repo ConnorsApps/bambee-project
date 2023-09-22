@@ -10,6 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 export interface CreateDialogProps {
   open: boolean;
   onClose: (task: TaskV1) => void;
+  onCancel: () => void;
 }
 
 const tommorrow = new Date();
@@ -35,13 +36,12 @@ const CreateDialog = (props: CreateDialogProps) => {
 
   const isFormValid = () => {
     if (!name) return false;
-    if (!description) return false;
     if (!dueBy) return false;
     return true;
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog onClose={props.onCancel} open={open}>
       <DialogTitle>Create New Task</DialogTitle>
       <form ref={formRef}>
         <TextField label='Name' name='name' value={name} onChange={(e) => setName(e.target.value)} required fullWidth />

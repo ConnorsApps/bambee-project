@@ -1,8 +1,9 @@
 import { Task } from '@prisma/client';
 
-const valid = (_: Task) => {
+const valid = (task: Task) => {
   // todo
-  let issues = [];
+  const issues = [];
+  console.log('task',task)
 
   return issues;
 };

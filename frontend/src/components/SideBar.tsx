@@ -9,15 +9,18 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CreateDialog from './Create';
 import { useState } from 'react';
 import { TaskV1 } from '../types/v1';
+import { BACKEND_URL, DEFAULT_HEADERS } from '../utils/constants';
 
 const BasicList = () => {
   const [createOpen, setCreateOpen] = useState(false);
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <CreateDialog
+        onCancel={() => setCreateOpen(false)}
         open={createOpen}
-        onClose={(value: TaskV1) => {
-          console.log('value', value);
+        onClose={(task: TaskV1) => {
+          fetch(`${BACKEND_URL}/v1/task`, { method: 'POST', headers: DEFAULT_HEADERS, body: JSON.stringify(task) });
+          console.log('value', task);
         }}
       />
       <nav aria-label='main mailbox folders'>
