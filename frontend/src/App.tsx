@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import './App.css';
-import BasicList from './SideBar';
+import BasicList from './components/SideBar';
 
 function App() {
   return (

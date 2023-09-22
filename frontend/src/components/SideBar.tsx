@@ -8,12 +8,18 @@ import Divider from '@mui/material/Divider';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CreateDialog from './Create';
 import { useState } from 'react';
+import { TaskV1 } from '../types/v1';
 
 const BasicList = () => {
   const [createOpen, setCreateOpen] = useState(false);
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <CreateDialog open={createOpen} onClose={(value: string) => {}} />
+      <CreateDialog
+        open={createOpen}
+        onClose={(value: TaskV1) => {
+          console.log('value', value);
+        }}
+      />
       <nav aria-label='main mailbox folders'>
         <List>
           <ListItem disablePadding>
