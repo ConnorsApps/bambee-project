@@ -1,9 +1,9 @@
 import { AppBar, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import './App.css';
-import BasicList from './components/SideBar';
+import Tasks from './components/Tasks';
 import { useState } from 'react';
 import CreateDialog from './components/Create';
-import { TaskV1 } from './types/v1';
+import { Task } from './types/tasks';
 import { BACKEND_URL, DEFAULT_HEADERS } from './utils/constants';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -14,7 +14,7 @@ function App() {
       <CreateDialog
         onCancel={() => setCreateOpen(false)}
         open={createOpen}
-        onClose={(task: TaskV1) => {
+        onClose={(task: Task) => {
           fetch(`${BACKEND_URL}/v1/task`, { method: 'POST', headers: DEFAULT_HEADERS, body: JSON.stringify(task) });
         }}
       />
@@ -29,7 +29,7 @@ function App() {
           </Button>
         </Toolbar>
       </AppBar>
-      <BasicList />
+      <Tasks />
     </div>
   );
 }

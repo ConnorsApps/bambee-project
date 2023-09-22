@@ -1,6 +1,6 @@
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { TaskStatusV1, TaskV1 } from '../types/v1';
+import { TaskStatus, Task } from '../types/tasks';
 import { useRef, useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -9,7 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export interface CreateDialogProps {
   open: boolean;
-  onClose: (task: TaskV1) => void;
+  onClose: (task: Task) => void;
   onCancel: () => void;
 }
 
@@ -24,12 +24,12 @@ const CreateDialog = (props: CreateDialogProps) => {
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const submit = () => {
-    const task: TaskV1 = {
+    const task: Task = {
       name,
       createdAt: new Date(),
       description,
       dueBy: dueBy!.toDate(), // Can't be false due to validation function
-      status: TaskStatusV1.NEW,
+      status: TaskStatus.NEW,
     };
     onClose(task);
   };

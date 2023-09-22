@@ -8,4 +8,4 @@ const valid = (task: Task) => {
   return issues;
 };
 
-export const sharedV1Tasks = { valid };
+export const sharedTaskUtils = { valid };

@@ -1,12 +1,12 @@
 import express from 'express';
 import { TasksPrismaClient } from '../types';
-import { sharedV1Tasks } from '../../shared/v1/tasks';
+import { sharedTaskUtils } from '../utils';
 
 const getRouter = (db: TasksPrismaClient) => {
   const router = express.Router();
 
   router.post('/task', async (req, res) => {
-    const issues = sharedV1Tasks.valid(req.body);
+    const issues = sharedTaskUtils.valid(req.body);
     if (issues.length > 0) return res.status(400).json({ issues });
 
     await db.task.create({ data: req.body });
